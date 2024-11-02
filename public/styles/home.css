@@ -1,0 +1,212 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #efffc843;
+}
+
+/* Navbar  */
+
+nav {
+    top: 0;
+    height: 85px;
+    display: flex;
+    color: #F7F7F2;
+    position: sticky;
+    align-items: center;
+    padding-inline: .5rem;
+    background-color: #222725;
+    justify-content: space-between;
+}
+
+nav img {
+    width: 120px;
+    object-fit: contain;
+    height: auto;
+}
+
+nav img ~ div {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+nav span {
+    display: flex;
+    align-items: center;
+    padding: .8rem .5rem;
+    border-radius: 1rem;
+    width: 6.5rem;
+    transition: width 0.3s ease;
+    transform-origin: left;
+    background-color: rgba(245, 245, 245, 0.175);
+}
+
+nav span input {
+    background: transparent;
+    outline: none;
+    border: none;
+    width: 100%;
+    color: #F7F7F2;
+}
+
+nav span input::placeholder {
+    color: #F7F7F2;
+    opacity: .7;
+}
+
+nav .fa-magnifying-glass {
+    color: #F7F7F2;
+    opacity: .7;
+}
+
+nav .user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    border: 2px solid #3c3c3cf6;
+}
+
+/* Container  */
+
+#container {
+    font-family: Arial;
+    color: #121113;
+    margin-top: 50px;
+}
+
+#container div h1 {
+    margin-block: 1rem;
+    padding-left: .5rem;
+    font-size: 1.25rem;
+}
+
+.bestseller,
+.religious,
+.romance,
+.finance,
+.fantasy,
+.sci-fi,
+.kids {
+    /* background-color: #F7F7F2; */
+    background-color: #E4E6C3;
+    height: fit-content;
+    align-items: center;
+    display: flex;
+    overflow-x: scroll;
+    gap: 2rem;
+    padding: 1.5rem 1rem;
+}::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+.bestseller div,
+.religious div,
+.romance div,
+.finance div,
+.fantasy div,
+.sci-fi div,
+.kids div{
+    cursor: pointer;
+}
+
+.bestseller img,
+.religious img,
+.romance img,
+.finance img,
+.fantasy img,
+.sci-fi img,
+.kids img{
+    object-fit: cover;
+    image-rendering: optimizeSpeed;
+    border: .001px solid #23222278;
+    border-radius: .5rem;
+    height: 185px;
+    width: 130px;
+}
+
+/* .bestseller h3,
+.religious h3,
+.romance h3,
+.finance h3,
+.fantasy h3,
+.sci-fi h3,
+.kids h3{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1rem;
+    margin-top: .3rem;
+    margin-bottom: .6rem;
+} */
+
+button {
+    width: 100%;
+    padding-block: .5rem;
+    outline: none;
+    border: none;
+    border-radius: .7rem;
+    color: #F7F7F2;
+    font-size: .9rem;
+    margin-top: .5rem;
+    background-color: #222725;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #f7f7f22f;
+    color: #222725;
+    transition: background-color 0.8s ease;
+    border: .001px solid #3c3c3c78;
+}
+
+
+@media screen and (max-width: 40rem) {
+
+    nav span:active,
+    nav span:hover {
+        width: 10rem;
+        background-color: #121212;
+        border: 1px solid #3c3c3cf6;
+    }
+
+    #container {
+        margin-inline: .5rem;
+    }
+}
+
+@media screen and (min-width: 40rem) {
+
+    nav {
+        height: 100px;
+        justify-content: space-around;
+    }
+
+    nav img {
+        width: 140px;
+    }
+
+    nav span {
+        width: 100%;
+        transition: background-color 1s ease
+    }
+
+    nav span:active,
+    nav span:hover {
+        background-color: #121212f6;
+        border: 1px solid #3c3c3cf6;
+    }
+
+    #container {
+        max-width: 60%;
+        margin: 50px auto;
+    }
+}
