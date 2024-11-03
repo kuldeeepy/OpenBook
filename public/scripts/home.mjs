@@ -36,6 +36,11 @@ async function init() {
 
 init()
 
+// share book info
+function readBook(info) {
+    window.location.href = `./book.html?book_id=${info.id}&cover_id=${info.img}`
+}
+
 // for-kids buks
 function displayKids(buks) {
     
@@ -52,6 +57,11 @@ function displayKids(buks) {
             <button>Read</button>
         `
         collection.appendChild(book)
+
+        book.querySelector("button").addEventListener("click", () => {
+
+            readBook({id: buk.availability?.isbn ? buk.availability.isbn : buk.key, img: buk.cover_id})
+        })
     })
 }
 
@@ -71,6 +81,11 @@ function displayScienceFi(buks) {
             <button>Read</button>
         `
         collection.appendChild(book)
+        
+        book.querySelector("button").addEventListener("click", () => {
+
+            readBook({id: buk.availability?.isbn ? buk.availability.isbn : buk.key, img: buk.cover_id})
+        })
     })
 }
 
@@ -90,6 +105,11 @@ function displayFantasy(buks) {
             <button>Read</button>
         `
         collection.appendChild(book)
+
+        book.querySelector("button").addEventListener("click", () => {
+
+            readBook({id: buk.availability?.isbn ? buk.availability.isbn : buk.key, img: buk.cover_id})
+        })
     })
 }
 
@@ -109,6 +129,11 @@ function displayFinance(buks) {
             <button>Read</button>
         `
         collection.appendChild(book)
+
+        book.querySelector("button").addEventListener("click", () => {
+
+            readBook({id: buk.availability?.isbn ? buk.availability.isbn : buk.key, img: buk.cover_id})
+        })
     })
 }
 
@@ -128,6 +153,11 @@ function displayRomance(buks) {
             <button>Read</button>
         `
         collection.appendChild(book)
+
+        book.querySelector("button").addEventListener("click", () => {
+
+            readBook({id: buk.availability?.isbn ? buk.availability.isbn : buk.key, img: buk.cover_id})
+        })
     })
 }
 
@@ -147,6 +177,11 @@ function displayReligious(buks) {
             <button>Read</button>
         `
         collection.appendChild(book)
+
+        book.querySelector("button").addEventListener("click", () => {
+
+            readBook({id: buk.availability?.isbn ? buk.availability.isbn : buk.key, img: buk.cover_id})
+        })
     })
 }
 
@@ -156,7 +191,7 @@ function displayBestsellers(buks) {
     let collection = document.querySelector('.bestseller');
 
     buks?.forEach((buk) => {
-        
+
         let book = document.createElement("div");
         // let title = buk.title.length >= 18 ? buk.title.slice(0,15) + '..' : buk.title
 
@@ -166,5 +201,10 @@ function displayBestsellers(buks) {
             <button>Read</button>
         `
         collection.appendChild(book)
+
+        book.querySelector("button").addEventListener("click", () => {
+
+            readBook({id: buk.availability?.isbn ? buk.availability.isbn : buk.key, img: buk.cover_id})
+        })
     })
 }

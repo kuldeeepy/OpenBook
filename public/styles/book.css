@@ -3,6 +3,7 @@
     padding: 0;
     font-size: 1rem;
     box-sizing: border-box;
+    font-family: Arial;
 }
 
 body {
@@ -75,90 +76,57 @@ nav .user {
     border: 2px solid #3c3c3cf6;
 }
 
-/* Container  */
+ /* Container  */
 
-#container {
+ #container ~ h3 {
+    font-size: 1.3rem;
+    padding-left: 1rem;
+    border-top: 1px solid #1212123a;
+    padding-block: .75rem;
+    border-bottom: 1px solid #1212123a;
+ }
+
+ #container {
+    padding: 1.5rem 1rem;
+ }
+
+ #container .book {
+    display: flex;
+    align-items: start;
+    flex-direction: column;
     font-family: Arial;
-    color: #121113;
-    margin-top: 50px;
 }
 
-#container div h1 {
-    margin-block: 1rem;
-    padding-left: .5rem;
+.book h2 {
     font-size: 1.25rem;
 }
 
-.bestseller,
-.religious,
-.romance,
-.finance,
-.fantasy,
-.sci-fi,
-.kids {
-    /* background-color: #F7F7F2; */
-    background-color: #E4E6C3;
-    height: fit-content;
-    align-items: center;
-    display: flex;
-    overflow-x: scroll;
-    gap: 2rem;
-    padding: 1.5rem 1rem;
-}::-webkit-scrollbar {
-    display: none;
-}
-
-
-
-.bestseller div,
-.religious div,
-.romance div,
-.finance div,
-.fantasy div,
-.sci-fi div,
-.kids div{
-    cursor: pointer;
-}
-
-.bestseller img,
-.religious img,
-.romance img,
-.finance img,
-.fantasy img,
-.sci-fi img,
-.kids img{
-    object-fit: cover;
-    image-rendering: optimizeSpeed;
-    border: .001px solid #23222278;
-    border-radius: .5rem;
-    height: 185px;
-    width: 130px;
-}
-
-/* .bestseller h3,
-.religious h3,
-.romance h3,
-.finance h3,
-.fantasy h3,
-.sci-fi h3,
-.kids h3{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+.book p {
+    margin-top: .5rem;
     font-size: 1rem;
-    margin-top: .3rem;
-    margin-bottom: .6rem;
-} */
+}
 
-button {
+.book img {
     width: 100%;
-    padding-block: .5rem;
-    outline: none;
+    object-fit: contain;
+    image-rendering: optimizeSpeed;
+    margin: 1rem auto;
+    max-width: 16rem;
+    height: auto;
+    border-radius: 1rem;
+}
+
+.book button {
+    width: 85%;
+    margin: 0 auto;
+    padding-block: .6rem;
     border: none;
+    outline: none;
     border-radius: .7rem;
     color: #F7F7F2;
-    font-size: .9rem;
-    margin-top: .5rem;
     background-color: #222725;
     cursor: pointer;
+    max-width: 16rem;
 }
 
 button:hover {
@@ -167,7 +135,6 @@ button:hover {
     transition: background-color 0.8s ease;
     border: .001px solid #3c3c3c78;
 }
-
 
 @media screen and (max-width: 40rem) {
 
@@ -205,8 +172,11 @@ button:hover {
         border: 1px solid #3c3c3cf6;
     }
 
+    #container, .more {
+        max-width: 60%;
+    }
+
     #container {
-        max-width: 65%;
         margin: 50px auto;
     }
 }
