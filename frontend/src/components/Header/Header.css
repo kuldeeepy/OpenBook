@@ -1,17 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-    font-size: 1rem;
-    box-sizing: border-box;
-    font-family: Arial;
-}
-
-body {
-    background-color: #efffc843;
-}
-
-/* Navbar  */
-
 nav {
     top: 0;
     height: 85px;
@@ -76,66 +62,6 @@ nav .user {
     border: 2px solid #3c3c3cf6;
 }
 
- /* Container  */
-
- #container ~ h3 {
-    font-size: 1.3rem;
-    padding-left: 1rem;
-    border-top: 1px solid #1212123a;
-    padding-block: .75rem;
-    border-bottom: 1px solid #1212123a;
- }
-
- #container {
-    padding: 1.5rem 1rem;
- }
-
- #container .book {
-    display: flex;
-    align-items: start;
-    flex-direction: column;
-    font-family: Arial;
-}
-
-.book h2 {
-    font-size: 1.25rem;
-}
-
-.book p {
-    margin-top: .5rem;
-    font-size: 1rem;
-}
-
-.book img {
-    width: 100%;
-    object-fit: contain;
-    image-rendering: optimizeSpeed;
-    margin: 1rem auto;
-    max-width: 16rem;
-    height: auto;
-    border-radius: 1rem;
-}
-
-.book button {
-    width: 85%;
-    margin: 0 auto;
-    padding-block: .6rem;
-    border: none;
-    outline: none;
-    border-radius: .7rem;
-    color: #F7F7F2;
-    background-color: #222725;
-    cursor: pointer;
-    max-width: 16rem;
-}
-
-button:hover {
-    background-color: #f7f7f22f;
-    color: #222725;
-    transition: background-color 0.8s ease;
-    border: .001px solid #3c3c3c78;
-}
-
 @media screen and (max-width: 40rem) {
 
     nav span:active,
@@ -143,10 +69,6 @@ button:hover {
         width: 10rem;
         background-color: #121212;
         border: 1px solid #3c3c3cf6;
-    }
-
-    #container {
-        margin-inline: .5rem;
     }
 }
 
@@ -170,13 +92,5 @@ button:hover {
     nav span:hover {
         background-color: #121212f6;
         border: 1px solid #3c3c3cf6;
-    }
-
-    #container, .more {
-        max-width: 60%;
-    }
-
-    #container {
-        margin: 50px auto;
     }
 }
