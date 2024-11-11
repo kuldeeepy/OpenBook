@@ -12,6 +12,7 @@ let browser;
 async function launchBrowser() {
     if (!browser) {
         browser = await puppeteer.launch({
+            executablePath: puppeteer.executablePath(),
             headless: true,
             args: ['--no-sandbox', '--disable-setuid-sandbox']
         });
