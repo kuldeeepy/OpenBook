@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
-  "postinstall": "PUPPETEER_CACHE_DIR=/opt/render/.cache/puppeteer npx puppeteer install",
+  "postinstall": "npx puppeteer install --cache /opt/render/.cache/puppeteer",
     "start": "node index.js"
   },
   "keywords": [],
