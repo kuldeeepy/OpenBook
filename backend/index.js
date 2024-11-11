@@ -3,6 +3,8 @@ const puppeteer = require("puppeteer");
 const app = express();
 const port = 3000;
 
+app.get("/wakeup", (req, res) => res.send("Server is awake!"))
+
 app.get("/ebook", async (req, res) => {
     const query = req.query.q;
 
