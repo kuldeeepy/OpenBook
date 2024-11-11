@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
-  "postinstall": "npx puppeteer install --cache /opt/render/.cache/puppeteer",
+  "postinstall": "echo 'Installing Chromium...' && npx puppeteer install --cache /opt/render/.cache/puppeteer && echo 'Chromium Installed!'",
     "start": "node index.js"
   },
   "keywords": [],
