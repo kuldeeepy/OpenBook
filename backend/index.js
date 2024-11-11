@@ -9,11 +9,10 @@ app.get("/wakeup", (req, res) => res.send("Server is awake!"));
 
 let browser;
 
-
 async function launchBrowser() {
     if (!browser) {
         browser = await puppeteer.launch({
-            executablePath: puppeteer.executablePath(),
+            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH,
             headless: true,
             args: ['--no-sandbox', '--disable-setuid-sandbox']
         });

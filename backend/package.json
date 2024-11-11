@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
-    "postinstall": "npx puppeteer install --cache /opt/render/.cache/puppeteer",
+    "postinstall": "curl -sSL https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o /opt/render/project/google-chrome.deb && dpkg -i /opt/render/project/google-chrome.deb && apt-get install -f",
     "start": "node index.js"
   },
   "keywords": [],
