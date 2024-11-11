@@ -1,6 +1,8 @@
 const express = require("express");
-const puppeteer = require("puppeteer-core");
+const puppeteer = require("puppeteer");
 const chromium = require('chrome-aws-lambda');
+const fs = require('fs');
+const path = require('path');
 require("dotenv").config();
 const app = express();
 
