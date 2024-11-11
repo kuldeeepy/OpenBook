@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
-    "postinstall": "curl -sSL https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.tar.bz2 -o /opt/render/project/google-chrome.tar.bz2 && tar -xjf /opt/render/project/google-chrome.tar.bz2 -C /opt/render/project/google-chrome && rm /opt/render/project/google-chrome.tar.bz2",
+    "postinstall": "curl -sSL https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.tar.gz -o /opt/render/project/google-chrome.tar.gz && tar -xvzf /opt/render/project/google-chrome.tar.gz -C /opt/render/project/google-chrome && rm /opt/render/project/google-chrome.tar.gz",
     "start": "node index.js"
   },
   "keywords": [],
