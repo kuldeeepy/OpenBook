@@ -2,7 +2,6 @@ const express = require("express");
 const puppeteer = require("puppeteer");
 require("dotenv").config();
 const app = express();
-const port = 3000;
 
 const base = process.env.BASE_URL;
 
@@ -118,6 +117,6 @@ process.on("SIGINT", async () => {
     process.exit();
 });
 
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+app.listen(process.env.PORT, () => {
+    console.log(`Server running on port ${process.env.PORT}`);
 });
