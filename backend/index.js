@@ -1,5 +1,5 @@
 const express = require("express");
-const puppeteer = require("puppeteer-core");
+const puppeteer = require("puppeteer");
 require("dotenv").config();
 const app = express();
 
@@ -9,13 +9,11 @@ app.get("/wakeup", (req, res) => res.send("Server is awake!"));
 
 let browser;
 
+
 async function launchBrowser() {
     if (!browser) {
-
-        const executablePath = '/usr/bin/chromium-browser'; 
-
         browser = await puppeteer.launch({
-            executablePath: executablePath,
+            executablePath: puppeteer.executablePath(),
             headless: true,
             args: ['--no-sandbox', '--disable-setuid-sandbox']
         });
