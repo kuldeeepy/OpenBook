@@ -1,8 +1,5 @@
 const express = require("express");
 const puppeteer = require("puppeteer");
-const chromium = require('chrome-aws-lambda');
-const fs = require('fs');
-const path = require('path');
 require("dotenv").config();
 const app = express();
 
@@ -14,12 +11,12 @@ let browser;
 async function launchBrowser() {
     if (!browser) {
         browser = await puppeteer.launch({
-            args: chromium.args,
-            executablePath: await chromium.executablePath,
-            headless: chromium.headless,
+            headless: true,
+            args: ['--no-sandbox', '--disable-setuid-sandbox']
         });
     }
-}
+    return browser;
+}   
 
 // Fetching ebook
 app.get("/ebook", async (req, res) => {
