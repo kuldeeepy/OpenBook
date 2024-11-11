@@ -1,5 +1,5 @@
 const express = require("express");
-const puppeteer = require("puppeteer");
+const puppeteer = require("puppeteer-core");
 require("dotenv").config();
 const app = express();
 
@@ -11,13 +11,17 @@ let browser;
 
 async function launchBrowser() {
     if (!browser) {
+
+        const executablePath = '/usr/bin/chromium-browser'; 
+
         browser = await puppeteer.launch({
-            executablePath: '/opt/render/.cache/puppeteer/chrome/chrome-linux64/chrome',
+            executablePath: executablePath,
             headless: true,
             args: ['--no-sandbox', '--disable-setuid-sandbox']
         });
     }
 }
+
 
 // Fetching ebook
 app.get("/ebook", async (req, res) => {
