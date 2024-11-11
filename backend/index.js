@@ -9,12 +9,19 @@ app.get("/wakeup", (req, res) => res.send("Server is awake!"));
 
 let browser;
 
+// Launch browser
 async function launchBrowser() {
     if (!browser) {
-        browser = await puppeteer.launch({
-            headless: true,
-            args: ['--no-sandbox', '--disable-setuid-sandbox']
-        });
+        try {
+            browser = await puppeteer.launch({
+                executablePath: process.env.CHROME_EXECUTABLE_PATH || puppeteer.executablePath(), 
+                headless: true,
+                args: ['--no-sandbox', '--disable-setuid-sandbox']
+            });
+        } catch (error) {
+            console.error("Error launching browser:", error);
+            throw error; 
+        }
     }
 }
 
@@ -57,7 +64,7 @@ app.get("/ebook", async (req, res) => {
             });
 
             return result;
-        }, base);  
+        }, base);
 
         await page.close();
 
@@ -102,12 +109,11 @@ async function getDownloadLink(bookUrl) {
             data.author = authorEl.textContent.trim();
         }
         return data;
-    }, base);  
+    }, base);
 
-    await page.close(); 
+    await page.close();
     return downloadLink;
 }
-
 
 process.on("exit", async () => {
     if (browser) await browser.close();
