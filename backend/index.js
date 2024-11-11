@@ -1,25 +1,23 @@
 const express = require("express");
 const puppeteer = require("puppeteer-core");
+const chromium = require('chrome-aws-lambda');
 require("dotenv").config();
 const app = express();
 
 const base = process.env.BASE_URL;
-process.env.PUPPETEER_EXECUTABLE_PATH = require('puppeteer-core').executablePath();
-
 
 app.get("/wakeup", (req, res) => res.send("Server is awake!"));
 
 let browser;
-
 async function launchBrowser() {
     if (!browser) {
         browser = await puppeteer.launch({
-            headless: true,
-            args: ['--no-sandbox', '--disable-setuid-sandbox']
+            args: ['--no-sandbox', '--disable-setuid-sandbox'],
+            executablePath: await chromium.executablePath,
+            headless: chromium.headless,
         });
     }
 }
-
 
 // Fetching ebook
 app.get("/ebook", async (req, res) => {
