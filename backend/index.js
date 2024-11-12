@@ -23,7 +23,7 @@ async function searchBooks(q) {
         });
         const page = await browser.newPage();
         // await page.setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36");
-        await page.goto(`${base}/search?q=${encodeURIComponent(q)}&page=1`, { waitUntil: 'networkidle2'});
+        await page.goto(`${base}/search?q=${encodeURIComponent(q)}&page=1`, { waitUntil: 'networkidle2', timeout: 90000});
 
         const books = await page.evaluate((baseUrl) => {
             const result = [];
@@ -56,16 +56,16 @@ async function getDownloadLink(bookUrl) {
 
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    await page.goto(bookUrl, { waitUntil: 'networkidle2', timeout: 90000 });
+    await page.goto(bookUrl, { waitUntil: 'networkidle2', timeout: 50000 });
 
     const initialDownloadSelector = '#download-button > a';
-    await page.waitForSelector(initialDownloadSelector, { visible: true });
+    await page.waitForSelector(initialDownloadSelector, { visible: true, timeout: 50000 });
     const initialDownloadLink = await page.$eval(initialDownloadSelector, element => element.href);
 
     await page.goto(initialDownloadLink, { waitUntil: 'networkidle2' });
 
     const finalDownloadSelector = '.btn-group a[type="button"]';
-    await page.waitForSelector(finalDownloadSelector, { visible: true });
+    await page.waitForSelector(finalDownloadSelector, { visible: true, timeout: 50000 });
     const finalDownloadLink = await page.$eval(finalDownloadSelector, element => element.href);
 
     await browser.close();
