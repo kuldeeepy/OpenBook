@@ -59,7 +59,7 @@ async function getDownloadLink(bookUrl) {
     await page.goto(bookUrl, { waitUntil: 'networkidle2', timeout: 50000 });
 
     const initialDownloadSelector = '#download-button > a';
-    await page.waitForSelector(initialDownloadSelector, { visible: true, timeout: 50000 });
+    await page.waitForSelector(initialDownloadSelector, { visible: true, timeout: 90000 });
     const initialDownloadLink = await page.$eval(initialDownloadSelector, element => element.href);
 
     await page.goto(initialDownloadLink, { waitUntil: 'networkidle2' });
