@@ -56,7 +56,7 @@ async function getDownloadLink(bookUrl) {
 
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    await page.goto(bookUrl, { waitUntil: 'networkidle2' });
+    await page.goto(bookUrl, { waitUntil: 'networkidle2', timeout: 90000 });
 
     const initialDownloadSelector = '#download-button > a';
     await page.waitForSelector(initialDownloadSelector, { visible: true });
