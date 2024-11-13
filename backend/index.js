@@ -85,13 +85,13 @@ async function getDownloadLink(bookUrl) {
     await page.goto(bookUrl, { waitUntil: 'networkidle2', timeout: 30000 });
 
     const initialDownloadSelector = '#download-button > a';
-    await page.waitForSelector(initialDownloadSelector, { visible: true, timeout: 30000 });
+    // await page.waitForSelector(initialDownloadSelector, { visible: true, timeout: 30000 });
     const initialDownloadLink = await page.$eval(initialDownloadSelector, element => element.href);
 
     await page.goto(initialDownloadLink, { waitUntil: 'networkidle2' });
 
     const finalDownloadSelector = '.btn-group a[type="button"]';
-    // await page.waitForSelector(finalDownloadSelector, { visible: true, timeout: 0 });
+    await page.waitForSelector(finalDownloadSelector, { visible: true, timeout: 0 });
     let finalDownloadLink = await page.$eval(finalDownloadSelector, element => element.href);
 
     finalDownloadLink = finalDownloadLink?.split('ext')[0] + "ext=pdf"
