@@ -91,7 +91,7 @@ async function getDownloadLink(bookUrl) {
     await page.goto(initialDownloadLink, { waitUntil: 'networkidle2' });
 
     const finalDownloadSelector = '.btn-group a[type="button"]';
-    await page.waitForSelector(finalDownloadSelector, { visible: true, timeout: 30000 });
+    // await page.waitForSelector(finalDownloadSelector, { visible: true, timeout: 0 });
     let finalDownloadLink = await page.$eval(finalDownloadSelector, element => element.href);
 
     finalDownloadLink = finalDownloadLink?.split('ext')[0] + "ext=pdf"
