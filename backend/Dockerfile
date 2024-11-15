@@ -1,35 +1,25 @@
-# Dockerfile example with postinstall concept
+# Use Puppeteer's official image
+FROM ghcr.io/puppeteer/puppeteer:19.7.2
 
-FROM node:16-bullseye-slim
+# Set environment variables for Puppeteer
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
+    PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable
 
-# Install system dependencies and xvfb
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        wget \
-        gnupg \
-        software-properties-common \
-        ca-certificates \
-        xvfb \
-    && rm -rf /var/lib/apt/lists/*
+# Install xvfb
+RUN apt-get update && apt-get install -y xvfb
 
-# Set the working directory
+# Set working directory
 WORKDIR /usr/src/app
 
-# Copy package.json and package-lock.json to the container
+# Copy dependencies and install
 COPY package*.json ./
-
-# Run npm install
 RUN npm ci
 
-# Copy the rest of the application files into the container
+# Copy the rest of the application code
 COPY . .
 
-# Expose any necessary ports (if your app needs to listen to a port)
-# EXPOSE 3000
-
-# Start Xvfb and then run the app
-CMD xvfb-run --server-args="-screen 0 1280x1024x24" node index.js
-
+# Start the application using xvfb-run
+CMD ["xvfb-run", "--server-args=-screen 0 1024x768x24", "node", "index.js"]
 
 
 
