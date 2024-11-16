@@ -1,36 +1,18 @@
-# Start from an official Node.js image
-FROM node:18-slim
+FROM node:latest
 
-# Install necessary system dependencies, including xvfb
-RUN apt-get update && apt-get install -y \
-  xvfb \
-  libnss3 \
-  libxss1 \
-  libgdk-pixbuf2.0-0 \
-  libx11-xcb1 \
-  fonts-liberation \
-  libappindicator3-1 \
-  libasound2 \
-  wget \
-  curl \
-  && rm -rf /var/lib/apt/lists/*
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
+    PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable
 
-# Set the working directory inside the container
+RUN apt-get update && apt-get install -y xvfb
+
 WORKDIR /usr/src/app
 
-# Copy package.json and install dependencies
 COPY package*.json ./
-RUN npm install
+RUN npm ci
 
-# Copy the rest of the application code
 COPY . .
 
-# Set the default command to run the app
-CMD ["node", "index.js"]
-
-# Expose port if needed (e.g., for a web server)
-EXPOSE 3000
-
+CMD ["xvfb-run", "--server-args=-screen 0 1024x768x24", "node", "index.js"]
 
 
 # FROM ghcr.io/puppeteer/puppeteer:19.7.2
