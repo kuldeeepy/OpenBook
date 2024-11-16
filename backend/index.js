@@ -7,7 +7,7 @@ const app = express();
 app.use(cors());
 
 const base = process.env.BASE_URL;
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 6969;
 
 app.get("/wakeup", (req, res) => res.send("Server is awake!"));
 
