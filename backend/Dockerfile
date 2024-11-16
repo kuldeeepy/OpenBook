@@ -1,32 +1,29 @@
 FROM node:latest
 
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
-    PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable
-
-# Install dependencies
 RUN apt-get update && apt-get install -y \
+    wget \
+    gnupg \
+    ca-certificates \
+    apt-transport-https \
+    chromium \
+    chromium-driver \
     xvfb \
-    libnss3 \
-    libatk-bridge2.0-0 \
-    libxcomposite1 \
-    libxdamage1 \
-    libxrandr2 \
-    libgbm1 \
-    libasound2 \
-    libpangocairo-1.0-0 \
-    libpango-1.0-0 \
-    libcups2
+    && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /usr/src/app
+ENV CHROME_BIN=/usr/bin/chromium
+
+WORKDIR /app
 
 COPY package*.json ./
-RUN npm ci
 
+RUN npm update
+RUN npm install
+RUN npm i -g pm2
 COPY . .
 
 EXPOSE 3000
 
-CMD ["xvfb-run", "--auto-servernum", "--server-args=-screen 0 1024x768x24", "node", "index.js"]
+CMD ["pm2-runtime", "index.js"]
 
 
 
