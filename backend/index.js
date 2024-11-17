@@ -38,11 +38,11 @@ app.get("/ebook", async (req, res) => {
 });
 
 const searchBooks = async (title) => {
-  const browser = await puppeteer.launch({
-    headless: true,
+  const { page, browser } = await connect({
+    headless: false,
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
-  const page = await browser.newPage();
+  // const page = await browser.newPage();
   await page.setUserAgent(
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
   );
@@ -53,7 +53,7 @@ const searchBooks = async (title) => {
     });
     // await page.type('input[name="q"]', title);
     // await page.keyboard.press('Enter');
-    await page.waitForSelector("#genesis-content", { timeout: 20000 });
+    await page.waitForSelector("#genesis-content", { timeout: 0 });
 
     const books = await page.evaluate((baseUrl) => {
       return Array.from(
@@ -109,9 +109,9 @@ const getDownloadLink = async (bookUrl) => {
 
     newPage.on("response", async (response) => {
       const url = response.url();
-      //   console.log("Response URL:", url);
+      // console.log("Response URL:", url);
 
-      if (url.includes("fs4.oceanofpdf.com") && url.includes(".pdf")) {
+      if (url.includes("fs4.oceanofpdf.com") || url.includes(".pdf")) {
         lastValidLink = url;
       }
     });
