@@ -1,0 +1,94 @@
+nav {
+  top: 0;
+  height: 85px;
+  display: flex;
+  color: #f7f7f2;
+  position: sticky;
+  align-items: center;
+  padding-inline: 0.5rem;
+  background-color: #222725;
+  justify-content: space-between;
+}
+
+nav img {
+  width: 120px;
+  object-fit: contain;
+  height: auto;
+}
+
+nav img ~ div {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+nav span {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem;
+  border-radius: 1rem;
+  width: 6.5rem;
+  transition: width 0.3s ease;
+  transform-origin: left;
+  background-color: rgba(245, 245, 245, 0.175);
+}
+
+nav span input {
+  background: transparent;
+  outline: none;
+  border: none;
+  width: 100%;
+  color: #f7f7f2;
+}
+
+nav span input::placeholder {
+  color: #f7f7f2;
+  opacity: 0.7;
+}
+
+nav .fa-magnifying-glass {
+  color: #f7f7f2;
+  opacity: 0.7;
+}
+
+nav .user {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3rem;
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  border: 2px solid #3c3c3cf6;
+}
+
+@media screen and (max-width: 40rem) {
+  nav span:active,
+  nav span:hover {
+    width: 10rem;
+    background-color: #121212;
+    border: 1px solid #3c3c3cf6;
+  }
+}
+
+@media screen and (min-width: 40rem) {
+  nav {
+    height: 100px;
+    justify-content: space-around;
+  }
+
+  nav img {
+    width: 140px;
+  }
+
+  nav span {
+    width: 100%;
+    transition: background-color 1s ease;
+  }
+
+  nav span:active,
+  nav span:hover {
+    background-color: #121212f6;
+    border: 1px solid #3c3c3cf6;
+  }
+}
