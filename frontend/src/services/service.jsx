@@ -1,8 +1,8 @@
-const endpoint = "https://openlibrary.org/subjects";
+const endPoint = import.meta.env.VITE_ENDPOINT;
 
 // Books by category
 export async function getBookByCategory(category) {
-  const url = `${endpoint}/${category}.json?limit=12&offset=0`;
+  const url = `${endPoint}/subjects/${category}.json?limit=12&offset=0`;
 
   try {
     const resp = await fetch(url, { method: "GET" });
@@ -29,7 +29,7 @@ export async function fetchBookByIsbn(bukId, bukCover) {
   try {
     let bookData = null;
     if (bukId.startsWith("/works/")) {
-      const res = await fetch(`https://openlibrary.org${bukId}/editions.json`);
+      const res = await fetch(`${endPoint}/${bukId}/editions.json`);
       const data = await res.json();
       const { isbn_10, isbn_13 } = data?.entries[0] || data?.entries[1];
       const info =

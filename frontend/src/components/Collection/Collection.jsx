@@ -3,8 +3,8 @@ import "./collection.css";
 import { useNavigate } from "react-router-dom";
 import { getBookByCategory } from "../../services/service";
 
-const imageUrl = "https://covers.openlibrary.org/b/id";
-const fallBack = "https://sulkurl.com/b8s";
+const imageUrl = import.meta.env.VITE_IMAGE_URL;
+const fallBack = import.meta.env.VITE_FALLBACK_URL;
 
 function Collection({ name }) {
   const [books, setBooks] = useState([]);
