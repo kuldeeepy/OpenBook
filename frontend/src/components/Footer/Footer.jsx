@@ -1,9 +1,8 @@
 import React from "react";
-import "./footer.css";
 
 function Footer() {
   return (
-    <footer>
+    <footer className="text-center py-4 bg-[#222725] text-white fixed bottom-0 w-full">
       <p>&copy; {new Date().getFullYear()} OpenBook. All rights reserved.</p>
     </footer>
   );

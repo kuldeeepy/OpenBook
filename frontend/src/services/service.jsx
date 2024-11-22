@@ -1,8 +1,76 @@
 const endPoint = import.meta.env.VITE_ENDPOINT;
+const Firebase_Link = import.meta.env.VITE_FIREBASE_URL;
+const API_KEY = import.meta.env.VITE_API_KEY;
+const image = import.meta.env.VITE_IMAGE_URL;
+
+// Confirm verification
+export async function checkEmailVerification(token) {
+  const url = `${Firebase_Link}/accounts:lookup?key=${API_KEY}`;
+  const ops = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ idToken: token }),
+  };
+
+  return await apiRequest(url, ops);
+}
+
+// Send verification email
+export async function SendVerificationMail(token) {
+  const url = `${Firebase_Link}/accounts:sendOobCode?key=${API_KEY}`;
+  const ops = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ requestType: "VERIFY_EMAIL", idToken: token }),
+  };
+
+  return await apiRequest(url, ops);
+}
+
+// Login
+export async function LoginWithEmailPwd(mail, pwd) {
+  const url = `${Firebase_Link}/accounts:signInWithPassword?key=${API_KEY}`;
+  const ops = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email: mail,
+      password: pwd,
+      returnSecureToken: true,
+    }),
+  };
+
+  return await apiRequest(url, ops);
+}
+
+// Signup
+export async function SignupWithEmailPwd(uname, mail, pwd) {
+  const url = `${Firebase_Link}/accounts:signUp?key=${API_KEY}`;
+  const ops = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: uname,
+      email: mail,
+      password: pwd,
+      returnSecureToken: true,
+    }),
+  };
+
+  return await apiRequest(url, ops);
+}
 
 // Books by category
-export async function getBookByCategory(category) {
-  const url = `${endPoint}/subjects/${category}.json?limit=12&offset=0`;
+export async function getBookByCategory(category, offset = 0) {
+  const url = `${endPoint}/subjects/${category}.json?limit=12&offset=${offset}`;
 
   try {
     const resp = await fetch(url, { method: "GET" });
@@ -29,7 +97,7 @@ export async function fetchBookByIsbn(bukId, bukCover) {
   try {
     let bookData = null;
     if (bukId.startsWith("/works/")) {
-      const res = await fetch(`${endPoint}/${bukId}/editions.json`);
+      const res = await fetch(`${endPoint}${bukId}/editions.json`);
       const data = await res.json();
       const { isbn_10, isbn_13 } = data?.entries[0] || data?.entries[1];
       const info =
@@ -40,14 +108,14 @@ export async function fetchBookByIsbn(bukId, bukCover) {
 
       if (info) {
         const bookRes = await fetch(
-          `https://openlibrary.org/api/books?bibkeys=ISBN:${info}&format=json&jscmd=data`
+          `${endPoint}/api/books?bibkeys=ISBN:${info}&format=json&jscmd=data`
         );
         const bookDataResponse = await bookRes.json();
         bookData = bookDataResponse[`ISBN:${info}`];
       }
     } else {
       const bookRes = await fetch(
-        `https://openlibrary.org/api/books?bibkeys=ISBN:${bukId}&format=json&jscmd=data`
+        `${endPoint}/api/books?bibkeys=ISBN:${bukId}&format=json&jscmd=data`
       );
       const bookDataResponse = await bookRes.json();
       bookData = bookDataResponse[`ISBN:${bukId}`];
@@ -60,9 +128,7 @@ export async function fetchBookByIsbn(bukId, bukCover) {
 
     const { authors, cover, excerpts, publish_date, publishers, title } =
       bookData;
-    const img = cover
-      ? cover.large
-      : `https://covers.openlibrary.org/b/id/${bukCover}-L.jpg`;
+    const img = cover ? cover.large : `${image}/${bukCover}-L.jpg`;
 
     return {
       title,
@@ -77,5 +143,29 @@ export async function fetchBookByIsbn(bukId, bukCover) {
   } catch (error) {
     console.error("Error fetching book data:", error);
     return null;
+  }
+}
+
+// API_HANDLER
+async function apiRequest(url, options = {}) {
+  try {
+    const response = await fetch(url, options);
+
+    if (!response.ok) {
+      let errorMessage;
+
+      try {
+        const e = await response.json();
+        errorMessage = e.error?.message || `Error! status: ${response.status}`;
+      } catch (err) {
+        errorMessage = `HTTP error! status: ${response.status}`;
+      }
+
+      throw new Error(errorMessage);
+    }
+
+    return await response.json();
+  } catch (error) {
+    throw new Error(error.message);
   }
 }
