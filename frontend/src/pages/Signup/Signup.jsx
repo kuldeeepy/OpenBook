@@ -17,7 +17,10 @@ function Signup() {
     setLoading(true);
     try {
       const resp = await SignupWithEmailPwd(name, email, pwd);
-      localStorage.setItem("token", JSON.stringify(resp.idToken));
+      localStorage.setItem(
+        "info",
+        JSON.stringify({ uname: name, token: resp.idToken })
+      );
       setTimeout(() => {
         SendVerificationMail(resp.idToken);
         navigate("/verify");

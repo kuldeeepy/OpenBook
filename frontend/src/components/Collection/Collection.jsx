@@ -58,8 +58,8 @@ function Collection({ name }) {
 
   return (
     <div key={name} className="bg-[#dadad9] m-4 p-4 rounded-md">
-      <h1 className="mt-2 pl-2 text-xl font-medium">
-        {name.charAt(0).toUpperCase() + name.slice(1)}
+      <h1 className="text-xl font-medium">
+        {name?.charAt(0).toUpperCase() + name?.slice(1)}
       </h1>
       <div className="flex overflow-x-scroll gap-8 py-3 w-full hide-scrollbar scroll-smooth">
         {renderBooks(name)}

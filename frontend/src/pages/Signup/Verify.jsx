@@ -8,20 +8,20 @@ function Verify() {
   const { login } = useAuth();
   const [loading, setLoading] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
-  const token = JSON.parse(localStorage.getItem("token"));
+  const info = JSON.parse(localStorage.getItem("info"));
 
   const handleVerification = async () => {
     setLoading(true);
     try {
-      const resp = await checkEmailVerification(token);
+      const resp = await checkEmailVerification(info?.token);
       const user = resp.users[0];
 
       if (!user.emailVerified) throw new Error("Email is not verified!");
 
       if (user.emailVerified) {
         console.log("Email verified");
-        localStorage.removeItem("token");
-        login({ UID: user.localId, email: user.email });
+        localStorage.removeItem("info");
+        login({ UID: user.localId, uname: info.uname });
         setIsVerified(true);
         setTimeout(() => {
           navigate("/");

@@ -1,7 +1,10 @@
 import React from "react";
+import { useAuth } from "../../context/AuthContext";
 import { IoSearchOutline } from "react-icons/io5";
 
 function Navbar() {
+  const { user } = useAuth();
+
   return (
     <nav className="sticky top-0 h-[72px] flex items-center justify-between md:justify-around px-2 bg-[#0f0a0a] text-[#f7f7f2]">
       <img
@@ -10,7 +13,7 @@ function Navbar() {
         className="w-[120px] object-contain h-auto"
       />
       <div className="flex gap-2 items-center">
-        <span className="flex items-center py-3 px-2 rounded-xl w-[6.5rem] transition-all ease-in-out duration-300 bg-[#f5f5f5] bg-opacity-20">
+        <span className="flex items-center py-[10px] px-3 rounded-2xl max-sm:w-[6.5rem] w-52 max-sm:hover:w-40 transition-all ease-in-out duration-300 bg-[#F5F5F5] bg-opacity-20">
           <input
             type="search"
             placeholder="Search"
@@ -19,7 +22,7 @@ function Navbar() {
           <IoSearchOutline size={22} className="text-[#f7f7f2]" />
         </span>
         <p className="flex justify-center items-center text-xl h-[45px] w-[45px] rounded-full border-2 border-[#3c3c3cf6]">
-          K
+          {user?.uname[0]?.toUpperCase()}
         </p>
       </div>
     </nav>
