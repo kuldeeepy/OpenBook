@@ -15,7 +15,7 @@ function Login() {
     setLoading(true);
     try {
       const userData = await LoginWithEmailPwd(email, pwd);
-      login(userData);
+      login({ UID: userData.localId, email: userData.email });
       navigate("/");
     } catch (error) {
       setLoading(false);

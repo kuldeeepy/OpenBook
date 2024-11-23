@@ -22,9 +22,9 @@ function Navbar() {
           <IoSearchOutline size={22} className="text-[#f7f7f2]" />
         </span>
         <p className="flex justify-center items-center text-xl h-[45px] w-[45px] rounded-full border-2 border-[#3c3c3cf6]">
-          {user && user.name && user.uname[0]
+          {user && user?.uname
             ? user.uname[0].toUpperCase()
-            : "?"}
+            : user?.email[0].toUpperCase() || "?"}
         </p>
       </div>
     </nav>
